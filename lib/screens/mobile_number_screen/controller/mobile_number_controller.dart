@@ -12,6 +12,7 @@ class MobileNumberController extends GetxController {
     isLoading = true;
     update();
     try {
+      print('verification started');
       String phoneNumber = countryCode + number;
       int? forceResendingToken;
       await FirebaseAuth.instance.verifyPhoneNumber(
@@ -24,6 +25,7 @@ class MobileNumberController extends GetxController {
           isLoading = false;
           errorText = _handleVerificationError(e);
           update();
+          print(e);
         },
         codeSent: (String verificationId, int? resendToken) {
           forceResendingToken = resendToken;

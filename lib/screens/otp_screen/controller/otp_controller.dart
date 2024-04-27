@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../constants/static_data.dart';
+import '../../home_screen/view/home_screen.dart';
+import '../../signup_screen/view/signup_screen.dart';
 
 
 
@@ -67,8 +69,7 @@ class OtpController extends GetxController {
         log("User documents exist: ${userDoc.exists.toString()}");
 
         if (userCredential.additionalUserInfo!.isNewUser) {
-          //Get.offAll(() => const NameEntryScreen());
-        } else {
+          Get.offAll(() => const SignUpScreen());        } else {
           if (userDoc.exists) {
             log("User already exists");
             StaticData.saveUserDataToSharedPreferences(
@@ -76,13 +77,13 @@ class OtpController extends GetxController {
               userDoc['name'],
               userDoc['phoneNumber'],
               userDoc['email'],
-              userDoc['area'],
+              userDoc['profilePhoto'],
             );
             StaticData.loadUserDataFromSharedPreferences();
-            //Get.offAll(() => const HomeScreen());
+            Get.offAll(() => const HomeScreen());
           } else {
             log("New user signing up");
-            //Get.offAll(() => const RegisterScreen());
+            Get.offAll(() => const SignUpScreen());
           }
         }
       }
